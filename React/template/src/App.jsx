@@ -1,25 +1,22 @@
 import './App.css';
-import P from './components/P/P';
-import Button from './components/ButtonComponent/ButtonComponent';
-import Counter from "./components/Counter/Counter";
 import {useState} from "react";
+import SearchInput from "./components/SearchInput/SearchInput";
+import Results from "./components/Results/Results";
+import Result from "./components/Result/Result";
 function App() {
-	const [count, setCount] = useState(0);
-
-	function incrementCount() {
-		setCount(count + 1);
-	}
-
-	function decrementCount() {
-		setCount(count - 1);
-	}
+	const data = ['1', '2', '11', '22','3'];
+	const [searchText, setSearchText] = useState('');
+	const updateResults = (text) => {
+		setSearchText(text);
+	};
 
 	return (
 		<>
-			<Button onClick={decrementCount}>-</Button>
-			<P>{count}</P>
-			<Button onClick={incrementCount}>+</Button>
 
+			<SearchInput updateResults={updateResults}/>
+				<Result value={<Results data={data} inputValue={searchText}/>}></Result>
+			{/*можно и без result, но в условии было 3 компоненты*/}
+				{/*<Results data={data} inputValue={searchText}/>*/}
 		</>
 	);
 }
